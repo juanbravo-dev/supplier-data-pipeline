@@ -4,13 +4,14 @@ Extraction of first montly CSV report.
 """
 
 import pandas as pd
+from pathlib import Path
 
 DATA_DIR = Path("data")
 OUTPUT_DIR = Path("output")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def read_csv(input_path: Path) -> pd.DataFrame:
-    df = pd.read_csv(input_path, encoding='utf-8', delimiter=';', decimal=',')
+    df = pd.read_csv(input_path, encoding='latin1', delimiter=';', decimal=',')
     return df
 
 def save_csv(df: pd.DataFrame, output_path: Path):
@@ -28,6 +29,6 @@ def main():
     df = read_csv(input_file)
     save_csv(df, output_file)
 
-if __name == "__main__":
+if __name__ == "__main__":
     main()
 
