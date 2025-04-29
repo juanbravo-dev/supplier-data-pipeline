@@ -1,5 +1,5 @@
 """
-Extraction of first montly CSV report.
+Extraction of first monthly CSV report.
 
 """
 import sys
