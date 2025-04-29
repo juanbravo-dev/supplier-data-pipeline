@@ -2,6 +2,7 @@
 Extraction of first montly CSV report.
 
 """
+import argparse
 import logging
 import pandas as pd
 from pathlib import Path
@@ -32,8 +33,7 @@ def save_csv(df: pd.DataFrame, output_path: Path):
     df.to_csv(output_path, index=False)
     logging.info(f"💾 Data saved successfully to {output_path}")
 
-def main():
-    month_name = "january"
+def main(month_name: str):
 
     input_filename = f"{month_name}_consumption_report.csv"
     output_filename = f"raw_extracted_{month_name}.csv"
@@ -46,6 +46,14 @@ def main():
     logging.info(f"✅ Extraction finished for {month_name.upper()}")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Extract monthly supplier consumption report.")
+    parser.add_argument(
+        "month",
+        type=str,
+        help="Month name to process (e.g., 'january', 'february', etc.)"
+    )
+    args = parser.parse_args()
     
-    main()
+    
+    main(args.month)
 
