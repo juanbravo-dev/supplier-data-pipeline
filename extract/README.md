@@ -10,7 +10,11 @@ This project extracts monthly supplier consumption reports from raw CSV files.
 
 - Month name validation to prevent typos
 
-- Logging all actions to console for traceability
+- Logging all actions to both console and 'extractor.log' for traceability
+
+- Safe file management using Pathlib
+
+
 
 ## Folder Structure
 
@@ -19,9 +23,10 @@ supplier-data-pipeline/
 ├── extract/
 │   └── extract.py
 ├── data/
-│   └── [location of input CSV files]
+│   └── [source CSV files go here]
 ├── output/
-│   └── [your extracted cleaned CSVs here]
+│   └── [cleaned files saved here]
+├── extractor.log  # (created at runtime)
 ├── README.md
 └── .gitignore
 ```
@@ -51,7 +56,9 @@ python extract/extract.py Ferbury
 
 ## Logging
 
-All actions (reading, saving, success, errors) are logged to the console using Python's built-in `logging` module.
+All actions (reading, saving, success, errors) are logged in two places:
+    - Console 
+    - 'extractor.log' file
 
 ## Author
 
