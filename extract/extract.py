@@ -2,6 +2,7 @@
 Extraction of first montly CSV report.
 
 """
+import sys
 import argparse
 import logging
 import pandas as pd
@@ -22,6 +23,18 @@ DATA_DIR = Path("data")
 OUTPUT_DIR = Path("output")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+VALID_MONTHS = {
+    "january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december"
+}
+
+def validate_month(month: str) -> str:
+    month = month.lower()
+    if month not in VALID_MONTHS:
+        logging.error(f"❌ Invalid month name: '{month}'. Valid options: {sorted(VALID_MONTHS)}")
+        sys.exit(1)
+    return month
+
 def read_csv(input_path: Path) -> pd.DataFrame:
     logging.info(f"Reading file: {input_path}")
     df = pd.read_csv(input_path, encoding='latin1', delimiter=';', decimal=',')
@@ -35,6 +48,8 @@ def save_csv(df: pd.DataFrame, output_path: Path):
 
 def main(month_name: str):
 
+    month_name = validate_month(month_name)
+
     input_filename = f"{month_name}_consumption_report.csv"
     output_filename = f"raw_extracted_{month_name}.csv"
 
@@ -45,6 +60,7 @@ def main(month_name: str):
     save_csv(df, output_file)
     logging.info(f"✅ Extraction finished for {month_name.upper()}")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract monthly supplier consumption report.")
     parser.add_argument(
@@ -53,7 +69,6 @@ if __name__ == "__main__":
         help="Month name to process (e.g., 'january', 'february', etc.)"
     )
     args = parser.parse_args()
-    
     
     main(args.month)
 
