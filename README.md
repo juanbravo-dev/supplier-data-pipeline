@@ -1,4 +1,4 @@
-# 📦 Supplier Data Pipeline
+# Supplier Data Pipeline
 
 This is an ETL pipeline developed in three phases, which I will refer to as versions: **V1**, **V2**, and **V3**.
 
@@ -15,7 +15,7 @@ Each monthly report is provided in CSV format. After manual download, the pipeli
 
 ---
 
-## 🧾 Report Structure (Raw CSV Columns)
+## Report Structure (Raw CSV Columns)
 
 Each row represents a single supplier. The columns include purchase accumulations across two years and multiple channels:
 
@@ -34,3 +34,5 @@ Each row represents a single supplier. The columns include purchase accumulation
 ---
 
 More details about the ETL phases, data cleaning logic, and SQL schema will be provided in their respective subfolders.
+
+README under construction 🚧
