@@ -1,3 +1,4 @@
 .DS_Store
 *.log
 output/
+data/*_consumption_report.csv
